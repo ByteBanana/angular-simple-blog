@@ -1,0 +1,57 @@
+<main class="form-login">
+  <form
+    [formGroup]="loginForm"
+    class="col-lg-6 offset-lg-3 col-md-10 offset-md-2 col-12"
+  >
+    <h1 class="h3 mb-3 fw-normal text-center">Login</h1>
+    <div class="form-group row">
+      <label for="username" class="col-sm-2 col-form-label">Username</label>
+      <div class="col-sm-10">
+        <input
+          type="username"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': usernameError }"
+          id="username"
+          formControlName="username"
+        />
+        <div class="invalid-feedback" *ngIf="usernameControl().errors">
+          <ng-container *ngIf="usernameControl().errors.required">
+            Username is required
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="password" class="col-sm-2 col-form-label">Password</label>
+      <div class="col-sm-10">
+        <input
+          type="password"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': passwordError }"
+          id="password"
+          formControlName="password"
+        />
+        <div class="invalid-feedback" *ngIf="passwordControl().errors">
+          <ng-container *ngIf="passwordControl().errors.required">
+            Password is required
+          </ng-container>
+          <ng-container *ngIf="passwordControl().errors.minlength != null">
+            Password must more then
+            {{ passwordControl().errors.minlength.requiredLength }} character
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <button
+        class="btn btn-lg btn-primary mx-auto col-sm-10 offset-sm-2"
+        type="submit"
+        (click)="onLogin()"
+      >
+        Login
+      </button>
+    </div>
+    <!-- <p class="mt-5 mb-3 text-muted">© 2017-2020</p> -->
+  </form>
+</main>
