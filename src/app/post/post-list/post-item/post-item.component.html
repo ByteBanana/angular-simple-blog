@@ -1,0 +1,24 @@
+<div
+  class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+  style="max-height: 230px;"
+>
+  <div class="col p-4 d-flex flex-column position-static">
+    <!-- <strong class="d-inline-block mb-2 text-primary">World</strong> -->
+    <h3 class="mb-0">{{ post.title }}</h3>
+    <div class="mb-1 text-muted">
+      {{ post.createDate | date }}
+    </div>
+
+    <quill-view-html
+      [content]="post === undefined ? '' : post.content"
+      theme="snow"
+    ></quill-view-html>
+    <!-- <p class="card-text mb-auto">
+      {{ post.content }}
+    </p> -->
+
+    <a [routerLink]="['/post/' + post.postId]" class="stretched-link"
+      >Continue reading</a
+    >
+  </div>
+</div>

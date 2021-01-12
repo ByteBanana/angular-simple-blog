@@ -48,6 +48,7 @@
         class="btn btn-lg btn-primary mx-auto col-sm-10 offset-sm-2"
         type="submit"
         (click)="onLogin()"
+        [disabled]="isLoggingIn"
       >
         Login
       </button>

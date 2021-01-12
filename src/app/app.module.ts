@@ -12,14 +12,25 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NewPostComponent } from './post/new-post/new-post.component';
+import { QuillModule } from 'ngx-quill';
 
-
+import 'quill-emoji/dist/quill-emoji.js';
+import { HomeComponent } from './home/home.component';
+import { PostListComponent } from './post/post-list/post-list.component';
+import { PostItemComponent } from './post/post-list/post-item/post-item.component';
+import { PostViewComponent } from './post/post-view/post-view.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     LoginComponent,
     RegisterComponent,
+    NewPostComponent,
+    HomeComponent,
+    PostListComponent,
+    PostItemComponent,
+    PostViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +40,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     NgxWebstorageModule.forRoot(),
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    QuillModule.forRoot({
+      modules: {
+        'emoji-shortname': true,
+        'emoji-textarea': true,
+        'emoji-toolbar': true,
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

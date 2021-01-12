@@ -5,28 +5,110 @@
   >
     <h1 class="h3 mb-3 fw-normal text-center">Register</h1>
     <div class="form-group row">
-      <label for="username" class="col-sm-2 col-form-label">Username</label>
-      <div class="col-sm-10">
-        <input type="username" class="form-control" id="username" formControlName="username" />
+      <label for="username" class="col-sm-3 col-form-label">Username</label>
+      <div class="col-sm-9">
+        <input
+          [ngClass]="{
+            'is-invalid':
+              usernameCtrl().invalid &&
+              (usernameCtrl().touched || usernameCtrl().dirty)
+          }"
+          type="username"
+          class="form-control"
+          id="username"
+          formControlName="username"
+        />
+
+        <div class="invalid-feedback" *ngIf="usernameCtrl().invalid">
+          <ng-container *ngIf="usernameCtrl().errors.required">
+            Username is required
+          </ng-container>
+          <ng-container *ngIf="usernameCtrl().errors.minlength != null">
+            Username must more then
+            {{ usernameCtrl().errors.minlength.requiredLength }}
+            character
+          </ng-container>
+        </div>
       </div>
     </div>
     <div class="form-group row">
-      <label for="email" class="col-sm-2 col-form-label">Email</label>
-      <div class="col-sm-10">
-        <input type="email" class="form-control" id="email" required />
+      <label for="email" class="col-sm-3 col-form-label">Email</label>
+      <div class="col-sm-9">
+        <input
+          [ngClass]="{
+            'is-invalid':
+              emailCtrl().invalid && (emailCtrl().touched || emailCtrl().dirty)
+          }"
+          type="email"
+          class="form-control"
+          id="email"
+          formControlName="email"
+        />
+
+        <div class="invalid-feedback" *ngIf="emailCtrl().invalid">
+          <ng-container *ngIf="emailCtrl().errors.required">
+            Email is required
+          </ng-container>
+          <ng-container *ngIf="emailCtrl().errors.email">
+            Email is invalid
+          </ng-container>
+        </div>
       </div>
     </div>
     <div class="form-group row">
-      <label for="password" class="col-sm-2 col-form-label">Password</label>
-      <div class="col-sm-10">
-        <input type="password" class="form-control" id="password" required />
+      <label for="password" class="col-sm-3 col-form-label">Password</label>
+      <div class="col-sm-9">
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          formControlName="password"
+          [ngClass]="{
+            'is-invalid':
+              passwordCtrl().invalid &&
+              (passwordCtrl().touched || passwordCtrl().dirty)
+          }"
+        />
+        <div class="invalid-feedback" *ngIf="passwordCtrl().invalid">
+          <ng-container *ngIf="passwordCtrl().errors.required">
+            Password is required
+          </ng-container>
+          <ng-container *ngIf="passwordCtrl().errors.minlength != null">
+            Password must more then
+            {{ passwordCtrl().errors.minlength.requiredLength }}
+            character
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="firstName" class="col-sm-3 col-form-label">First name</label>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          class="form-control"
+          id="firstName"
+          formControlName="firstName"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="lastName" class="col-sm-3 col-form-label">Last name</label>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          class="form-control"
+          id="lastName"
+          formControlName="lastName"
+        />
       </div>
     </div>
 
     <div class="form-group row">
       <button
-        class="btn btn-lg btn-primary mx-auto col-sm-10 offset-sm-2"
+        class="btn btn-lg btn-primary mx-auto col-sm-9 offset-sm-2"
         type="submit"
+        (click)="onRegister()"
       >
         Register
       </button>

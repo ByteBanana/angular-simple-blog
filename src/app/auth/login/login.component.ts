@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -17,6 +16,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   usernameError: boolean = false;
   passwordError: boolean = false;
+  isLoggingIn: boolean = false;
 
   constructor(private authService: AuthService) {}
 
@@ -60,7 +60,6 @@ export class LoginComponent implements OnInit {
         const password = this.loginForm.get('password').value;
         this.authService.login(username, password);
       }
-    } else {
     }
   }
 
