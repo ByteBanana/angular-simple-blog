@@ -1,5 +1,15 @@
 <div class="row mb-2">
   <div class="col-12">
-    <app-post-item *ngFor="let post of posts" [post]=post></app-post-item>
+    <ng-container *ngIf="posts.length; else elseTemplate">
+      <app-post-item *ngFor="let post of posts" [post]="post"></app-post-item>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <div class="jumbotron">
+        <h1 class="display-4">Create your first post</h1>
+        <a class="btn btn-primary btn-lg" [routerLink]="['/post/new']">
+          Let's go
+        </a>
+      </div>
+    </ng-template>
   </div>
 </div>

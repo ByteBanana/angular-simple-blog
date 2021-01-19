@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
     const isTouchedAndDirty = this.loginForm.dirty || this.loginForm.touched;
     this.usernameError = false;
     this.passwordError = false;
+    this.authService.clearAuthenticationData();
     if (this.loginForm.touched && isTouchedAndDirty) {
       if (this.loginForm.invalid) {
         if (this.usernameControl().errors) {

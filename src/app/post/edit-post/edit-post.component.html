@@ -1,6 +1,6 @@
-<h1>Create new post</h1>
+<h1>Edit post</h1>
 
-<form [formGroup]="newPostForm">
+<form [formGroup]="editPostForm">
   <div class="form-group row">
     <label for="title" class="col-sm-2 col-form-label">Title</label>
     <div class="col-sm-10">
@@ -28,6 +28,7 @@
     <label for="content" class="col-sm-2 col-form-label">Content</label>
     <div class="col-sm-10" style="min-height: 300px">
       <quill-editor
+        format="html"
         formControlName="content"
         trackChanges="all"
         (onEditorCreated)="addBindingCreated($event)"

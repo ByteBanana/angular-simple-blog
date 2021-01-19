@@ -1,4 +1,4 @@
-export class LoginResponse {
+export class AuthenticationResponse {
   constructor(
     public username: string,
     public token: string,

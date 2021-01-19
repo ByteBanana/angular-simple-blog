@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LocalStorageService } from 'ngx-webstorage';
 import { error } from 'protractor';
-import { LoginResponse } from './login/login-response.payload';
+import { tap } from 'rxjs/operators';
+import { AuthenticationResponse } from './login/login-response.payload';
 
 export interface RegisterData {
   username: string;
@@ -29,7 +30,7 @@ export class AuthService {
   login(username: string, password: string) {
     this.loggingIn.emit(true);
     this.http
-      .post<LoginResponse>(
+      .post<AuthenticationResponse>(
         'http://localhost:8080/api/auth/login',
         {
           username,
@@ -40,14 +41,11 @@ export class AuthService {
         }
       )
       .subscribe(
-        (response: HttpResponse<LoginResponse>) => {
+        (response: HttpResponse<AuthenticationResponse>) => {
           const data = response.body;
           console.log(response);
           if (response.ok) {
-            this.localSt.store('username', data.username);
-            this.localSt.store('token', data.token);
-            this.localSt.store('expiry', data.expiry);
-            this.localSt.store('refreshToken', data.refreshToken);
+            this.storeAuthenticationData(data);
             this.toastr.success('Login success.');
             this.router.navigate(['/']);
           }
@@ -78,6 +76,7 @@ export class AuthService {
   }
 
   logout() {
+    console.log('logout');
     const refreshToken = this.localSt.retrieve('refreshToken');
     const username = this.localSt.retrieve('username');
     this.http
@@ -92,21 +91,70 @@ export class AuthService {
         }
       )
       .subscribe((response) => {
-        this.localSt.clear('username');
-        this.localSt.clear('token');
-        this.localSt.clear('expiry');
-        this.localSt.clear('refreshToken');
+        console.log(response);
+        this.router.navigate(['/login']);
+        this.clearAuthenticationData();
       });
+  }
+
+  refreshToken() {
+    const refreshToken = this.localSt.retrieve('refreshToken');
+    const username = this.localSt.retrieve('username');
+
+    return this.http
+      .post<AuthenticationResponse>(
+        'http://localhost:8080/api/auth/refreshToken',
+        {
+          refreshToken,
+          username,
+        },
+        {
+          observe: 'response',
+        }
+      )
+      .pipe(
+        tap((response) => {
+          if (response.ok) {
+            this.clearAuthenticationData();
+            this.storeAuthenticationData(response.body);
+          }
+        })
+      );
+  }
+
+  storeAuthenticationData(data) {
+    this.localSt.store('username', data.username);
+    this.localSt.store('token', data.token);
+    this.localSt.store('expiry', data.expiry);
+    this.localSt.store('refreshToken', data.refreshToken);
+  }
+
+  clearAuthenticationData() {
+    this.localSt.clear('username');
+    this.localSt.clear('token');
+    this.localSt.clear('expiry');
+    this.localSt.clear('refreshToken');
   }
 
   isLoggedIn(): boolean {
     const username = this.localSt.retrieve('username');
     const token = this.localSt.retrieve('token');
+    const expiry = this.localSt.retrieve('expiry');
+    const refreshToken = this.localSt.retrieve('refreshToken');
 
-    return username !== null && token != null;
+    return (
+      username !== null &&
+      token != null &&
+      expiry != null &&
+      refreshToken != null
+    );
   }
 
-  getToken(): string {
+  getJwtToken(): string {
     return this.localSt.retrieve('token');
+  }
+
+  getUsername(): string {
+    return this.localSt.retrieve('username');
   }
 }

@@ -7,6 +7,9 @@ import { HomeComponent } from './home/home.component';
 import { PostViewComponent } from './post/post-view/post-view.component';
 import { NewPostComponent } from './post/new-post/new-post.component';
 import { AuthGuard } from './auth/auth.guard';
+import { MyDraftPostsComponent } from './me/my-draft-posts/my-draft-posts.component';
+import { MyPublishedPostsComponent } from './me/my-published-posts/my-published-posts.component';
+import { EditPostComponent } from './post/edit-post/edit-post.component';
 
 const routes: Routes = [
   {
@@ -22,6 +25,34 @@ const routes: Routes = [
       {
         path: ':postId',
         component: PostViewComponent,
+      },
+      {
+        path: ':postId/edit',
+        component: EditPostComponent,
+        canActivate: [AuthGuard],
+      },
+    ],
+  },
+  {
+    path: 'me',
+    children: [
+      {
+        path: 'posts/draft',
+        component: MyDraftPostsComponent,
+      },
+      {
+        path: 'posts/published',
+        component: MyPublishedPostsComponent,
+      },
+      {
+        path: 'posts',
+        redirectTo: '/me/posts/draft',
+        pathMatch: 'full',
+      },
+      {
+        path: '',
+        redirectTo: '/me/posts/draft',
+        pathMatch: 'full',
       },
     ],
   },

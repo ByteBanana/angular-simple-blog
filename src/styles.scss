@@ -76,12 +76,15 @@ h6 {
   flex: 0 0 auto;
 }
 
-.h-250 {
-  height: 250px;
+.post-item {
+  min-height: 200px;
+  max-height: 200px;
 }
+
 @media (min-width: 768px) {
-  .h-md-250 {
-    height: 250px;
+  .post-item {
+    min-height: 230px;
+    max-height: 230px;
   }
 }
 
@@ -120,4 +123,15 @@ h6 {
 }
 .blog-footer p:last-child {
   margin-bottom: 0;
+}
+
+.bt-0 {
+  border-top: 0px;
+}
+
+.b-no-radius {
+  border-radius: 0px;
+}
+.b-end-card {
+  border-radius: 0px 0px 0.25em 0.25em;
 }

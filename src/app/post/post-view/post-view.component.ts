@@ -9,18 +9,30 @@ import { PostService } from '../post.service';
   styleUrls: ['./post-view.component.scss'],
 })
 export class PostViewComponent implements OnInit {
-  post: PostResponse;
-  htmlString = '';
-  constructor(
-    private route: ActivatedRoute,
-    private postService: PostService
-  ) {}
-
-  ngOnInit(): void {
+  post: PostResponse = {
+    title: '',
+    subTitle: '',
+    content: '',
+    createDate: null,
+    lastUpdateDate: null,
+    username: '',
+    postId: 0,
+  };
+  constructor(private route: ActivatedRoute, private postService: PostService) {
     const postId = this.route.snapshot.params['postId'];
-    this.postService.fetchPostById(postId)
-      this.postService.onFetchPostById.subscribe((post:PostResponse)=>{
-        this.post = post;
-    })
+    this.fetchPostData(postId);
+
+    this.route.params.subscribe((params) => {
+      const postId = params['postId'];
+      this.fetchPostData(postId);
+    });
+  }
+
+  ngOnInit(): void {}
+
+  fetchPostData(postId) {
+    this.postService.fetchPostById(postId).subscribe((post: PostResponse) => {
+      this.post = post;
+    });
   }
 }

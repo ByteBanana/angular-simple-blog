@@ -1,0 +1,39 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a
+      class="nav-link"
+      [routerLink]="['/me/posts/draft']"
+      routerLinkActive="active"
+    >
+      Draft
+    </a>
+  </li>
+  <li class="nav-item">
+    <a
+      class="nav-link"
+      [routerLink]="['/me/posts/published']"
+      routerLinkActive="active"
+    >
+      Published
+    </a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div
+    class="card bt-0 b-no-radius"
+    *ngFor="let post of publishedPosts; let i = index"
+    [ngClass]="{ 'b-end-card': i == publishedPosts.length - 1 }"
+  >
+    <div class="card-body">
+      <h5 class="post-title">
+        {{ post.title }}
+        <a role="button" [routerLink]="['/post', post.postId, 'edit']">
+          <i-bs name="pencil" class="text-primary" width="1em" height="1rem">
+          </i-bs>
+        </a>
+      </h5>
+      <p class="blog-post-meta">{{ post.subTitle }}</p>
+    </div>
+  </div>
+</div>

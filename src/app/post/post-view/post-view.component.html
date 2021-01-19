@@ -1,11 +1,8 @@
-<div class="blog-post">
-  <h2 class="blog-post-title">{{ post === undefined ? "" : post.title }}</h2>
+<div class="card blog-post p-4">
+  <h2 class="blog-post-title">{{ post.title }}</h2>
   <p class="blog-post-meta">
     {{ (post === undefined ? "" : (post.createDate | date)) + " " }}
-    <a routerLink>{{post === undefined ? "" : post.username}}</a>
+    <a routerLink>{{ post === undefined ? "" : post.username }}</a>
   </p>
-  <quill-view-html
-    [content]="post === undefined ? '' : post.content"
-    theme="snow"
-  ></quill-view-html>
+  <quill-view-html [content]="post.content" theme="snow"></quill-view-html>
 </div>

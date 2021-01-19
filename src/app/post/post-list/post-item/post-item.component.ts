@@ -13,7 +13,6 @@ export class PostItemComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.post.createDate);
   }
 
 }
