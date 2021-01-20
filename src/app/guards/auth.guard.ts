@@ -14,6 +14,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -22,9 +23,7 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    console.log(this.authService.isLoggedIn());
 
-    console.log('auth gr');
     if (this.authService.isLoggedIn()) {
       return true;
     } else {
@@ -32,5 +31,9 @@ export class AuthGuard implements CanActivate {
     }
 
     return false;
+  }
+
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    return this.canActivate(route, state);
   }
 }

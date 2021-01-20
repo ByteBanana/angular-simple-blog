@@ -37,6 +37,10 @@ export class PostService {
     return this.http.post<PostResponse>(this.POST_URL, postRequest);
   }
 
+  checkPermiss(postId: number): Observable<any> {
+    return this.http.post(`${this.POST_URL}/${postId}/checkpermission`, {});
+  }
+
   updatePost(
     postId: number,
     postRequest: PostRequest

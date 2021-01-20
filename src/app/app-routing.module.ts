@@ -11,6 +11,7 @@ import { MyDraftPostsComponent } from './pages/my-draft-posts/my-draft-posts.com
 import { MyPublishedPostsComponent } from './pages/my-published-posts/my-published-posts.component';
 import { EditPostComponent } from './pages/edit-post/edit-post.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
+import { PermissionGuard } from './guards/permission.guard';
 
 const routes: Routes = [
   {
@@ -30,7 +31,7 @@ const routes: Routes = [
       {
         path: ':postId/edit',
         component: EditPostComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, PermissionGuard],
       },
     ],
   },
