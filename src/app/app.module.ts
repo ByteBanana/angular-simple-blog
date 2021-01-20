@@ -48,7 +48,10 @@ import { EditPostComponent } from './post/edit-post/edit-post.component';
     ReactiveFormsModule,
     NgxWebstorageModule.forRoot(),
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      preventDuplicates: true,
+    }),
     QuillModule.forRoot({
       modules: {
         'emoji-shortname': true,
