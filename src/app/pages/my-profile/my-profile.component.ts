@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MeService } from '../../services/me.service';
-import { UserProfilePayload } from '../../models/user-profile.model';
+import { UserProfileResponse } from '../../models/user-profile-response.model';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { UserProfileRequest } from 'src/app/models/user-profile-request.model';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-my-profile',
@@ -10,23 +14,30 @@ import { UserProfilePayload } from '../../models/user-profile.model';
 })
 export class MyProfileComponent implements OnInit {
   myProfileForm: FormGroup;
-  userProfilePayload: UserProfilePayload = {
+  userProfile: UserProfileResponse = {
     username: '',
     email: '',
     firstName: '',
     lastName: '',
   };
-  constructor(private meService: MeService) {
+  constructor(
+    private meService: MeService,
+    private localSt: LocalStorageService,
+    private toastr: ToastrService,
+    private router: Router
+  ) {
     this.myProfileForm = new FormGroup({
       username: new FormControl(''),
       email: new FormControl(''),
       firstName: new FormControl(''),
       lastName: new FormControl(''),
+      password: new FormControl(''),
+      rePassword: new FormControl(''),
     });
   }
 
   ngOnInit(): void {
-    this.meService.fetchMyProfile().subscribe((data: UserProfilePayload) => {
+    this.meService.fetchMyProfile().subscribe((data: UserProfileResponse) => {
       console.log(data);
       this.myProfileForm.patchValue({
         username: data.username,
@@ -39,6 +50,24 @@ export class MyProfileComponent implements OnInit {
   }
 
   onUpdateProfile() {
-    this.meService.updateMyProfile()
+    const formValues = this.myProfileForm.value;
+    if (formValues.password === formValues.repassword) {
+    }
+    const body: UserProfileRequest = {
+      email: formValues.email,
+      username: this.localSt.retrieve('username'),
+      firstName: formValues.firstName,
+      lastName: formValues.lastName,
+      password: formValues.password,
+    };
+
+    this.meService.updateMyProfile(body).subscribe(
+      () => {
+        this.toastr.success('Profile Updated');
+      },
+      (error) => {
+        this.toastr.error('Something went wrong!');
+      }
+    );
   }
 }
