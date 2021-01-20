@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { QuillEditorComponent } from 'ngx-quill';
 import { ToastrService } from 'ngx-toastr';
-import { PostRequest } from '../../models/post-request.payload';
-import { PostResponse } from '../../models/post-response.payload';
+import { PostRequest } from '../../models/post-request.model';
+import { PostResponse } from '../../models/post-response.model';
 import { PostService } from '../../services/post.service';
 
 @Component({

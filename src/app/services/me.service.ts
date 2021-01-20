@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PostResponse } from '../models/post-response.payload';
-import { UserProfilePayload } from '../models/user-profile.payload';
+import { PostResponse } from '../models/post-response.model';
+import { UserProfilePayload } from '../models/user-profile.model';
 
 @Injectable({
   providedIn: 'root',

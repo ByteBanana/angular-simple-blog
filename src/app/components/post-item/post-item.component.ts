@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PostRequest } from '../../models/post-request.payload';
-import { PostResponse } from '../../models/post-response.payload';
+import { PostRequest } from '../../models/post-request.model';
+import { PostResponse } from '../../models/post-response.model';
 
 @Component({
   selector: 'app-post-item',

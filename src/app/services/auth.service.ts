@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { LocalStorageService } from 'ngx-webstorage';
 import { error } from 'protractor';
 import { tap } from 'rxjs/operators';
-import { AuthenticationResponse } from '../models/login-response.payload';
+import { AuthenticationResponse } from '../models/auth-response.model';
 
 export interface RegisterData {
   username: string;

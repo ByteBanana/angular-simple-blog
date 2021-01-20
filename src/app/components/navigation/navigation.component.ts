@@ -4,7 +4,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../services/auth.service';
 import { filter } from 'rxjs/operators';
 import { PostService } from '../../services/post.service';
-import { PostResponse } from '../../models/post-response.payload';
+import { PostResponse } from '../../models/post-response.model';
 
 @Component({
   selector: 'app-navigation',

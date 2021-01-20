@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PostResponse } from 'src/app/models/post-response.payload';
+import { PostResponse } from 'src/app/models/post-response.model';
 import { MeService } from '../../services/me.service';
 
 @Component({

@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { catchError, filter, switchMap, take } from 'rxjs/operators';
 import { threadId } from 'worker_threads';
-import { AuthenticationResponse } from '../models/login-response.payload';
+import { AuthenticationResponse } from '../models/auth-response.model';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {

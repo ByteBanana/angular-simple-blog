@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MeService } from '../../services/me.service';
-import { UserProfilePayload } from '../../models/user-profile.payload';
+import { UserProfilePayload } from '../../models/user-profile.model';
 
 @Component({
   selector: 'app-my-profile',

@@ -7,8 +7,8 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { error } from 'protractor';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
-import { PostRequest } from '../models/post-request.payload';
-import { PostResponse } from '../models/post-response.payload';
+import { PostRequest } from '../models/post-request.model';
+import { PostResponse } from '../models/post-response.model';
 
 @Injectable({
   providedIn: 'root',
