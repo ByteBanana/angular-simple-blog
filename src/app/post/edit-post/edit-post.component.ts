@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuillEditorComponent } from 'ngx-quill';
-import { Toast, ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { PostRequest } from '../post-request.payload';
 import { PostResponse } from '../post-response.payload';
 import { PostService } from '../post.service';
@@ -35,7 +35,6 @@ export class EditPostComponent implements OnInit {
     });
 
     this.postService.onUpdatePostEvent.subscribe((published: boolean) => {
-
       if (this.editPostForm.invalid) {
         if (this.editPostForm.get('content').errors) {
           if (this.editPostForm.get('content').errors.required) {
