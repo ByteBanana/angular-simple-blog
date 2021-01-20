@@ -3,28 +3,29 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavigationComponent } from './navigation/navigation.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NewPostComponent } from './post/new-post/new-post.component';
+import { NewPostComponent } from './pages/new-post/new-post.component';
 import { QuillModule } from 'ngx-quill';
 
 import 'quill-emoji/dist/quill-emoji.js';
-import { HomeComponent } from './home/home.component';
-import { PostListComponent } from './post/post-list/post-list.component';
-import { PostItemComponent } from './post/post-list/post-item/post-item.component';
-import { PostViewComponent } from './post/post-view/post-view.component';
-import { TokenInterceptor } from './token.interceptor';
+import { HomeComponent } from './pages/home/home.component';
+import { PostListComponent } from './pages/post-list/post-list.component';
+import { PostItemComponent } from './components/post-item/post-item.component';
+import { PostViewComponent } from './pages/post-view/post-view.component';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 import { allIcons, NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
-import { MyDraftPostsComponent } from './me/my-draft-posts/my-draft-posts.component';
-import { MyPublishedPostsComponent } from './me/my-published-posts/my-published-posts.component';
-import { EditPostComponent } from './post/edit-post/edit-post.component';
+import { MyDraftPostsComponent } from './pages/my-draft-posts/my-draft-posts.component';
+import { MyPublishedPostsComponent } from './pages/my-published-posts/my-published-posts.component';
+import { EditPostComponent } from './pages/edit-post/edit-post.component';
+import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +40,7 @@ import { EditPostComponent } from './post/edit-post/edit-post.component';
     MyDraftPostsComponent,
     MyPublishedPostsComponent,
     EditPostComponent,
+    MyProfileComponent,
   ],
   imports: [
     BrowserModule,

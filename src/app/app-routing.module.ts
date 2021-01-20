@@ -1,15 +1,16 @@
 import { componentFactoryName } from '@angular/compiler';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { HomeComponent } from './home/home.component';
-import { PostViewComponent } from './post/post-view/post-view.component';
-import { NewPostComponent } from './post/new-post/new-post.component';
-import { AuthGuard } from './auth/auth.guard';
-import { MyDraftPostsComponent } from './me/my-draft-posts/my-draft-posts.component';
-import { MyPublishedPostsComponent } from './me/my-published-posts/my-published-posts.component';
-import { EditPostComponent } from './post/edit-post/edit-post.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { HomeComponent } from './pages/home/home.component';
+import { PostViewComponent } from './pages/post-view/post-view.component';
+import { NewPostComponent } from './pages/new-post/new-post.component';
+import { AuthGuard } from './guards/auth.guard';
+import { MyDraftPostsComponent } from './pages/my-draft-posts/my-draft-posts.component';
+import { MyPublishedPostsComponent } from './pages/my-published-posts/my-published-posts.component';
+import { EditPostComponent } from './pages/edit-post/edit-post.component';
+import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'me',
     children: [
+      {
+        path: 'profile',
+        component: MyProfileComponent,
+      },
       {
         path: 'posts/draft',
         component: MyDraftPostsComponent,
