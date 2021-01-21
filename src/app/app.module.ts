@@ -26,6 +26,7 @@ import { MyDraftPostsComponent } from './pages/my-draft-posts/my-draft-posts.com
 import { MyPublishedPostsComponent } from './pages/my-published-posts/my-published-posts.component';
 import { EditPostComponent } from './pages/edit-post/edit-post.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
+import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +42,7 @@ import { MyProfileComponent } from './pages/my-profile/my-profile.component';
     MyPublishedPostsComponent,
     EditPostComponent,
     MyProfileComponent,
+    ConfirmModalComponent,
   ],
   imports: [
     BrowserModule,

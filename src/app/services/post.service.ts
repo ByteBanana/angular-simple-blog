@@ -50,4 +50,8 @@ export class PostService {
       postRequest
     );
   }
+
+  deletePost(postId: number) {
+    return this.http.delete(`${this.POST_URL}/${postId}`);
+  }
 }

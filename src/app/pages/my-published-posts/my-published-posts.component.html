@@ -29,12 +29,46 @@
       <div class="card-body">
         <h5 class="post-title">
           {{ post.title }}
+          <a role="button" [routerLink]="['/post', post.postId]">
+            <i-bs
+              name="eye-fill"
+              class="text-success"
+              width="1em"
+              height="1rem"
+            >
+            </i-bs>
+          </a>
           <a role="button" [routerLink]="['/post', post.postId, 'edit']">
-            <i-bs name="pencil" class="text-primary" width="1em" height="1rem">
+            <i-bs
+              name="pencil-fill"
+              class="text-primary"
+              width="1em"
+              height="1rem"
+            >
+            </i-bs>
+          </a>
+          <a role="button" (click)="onDeletePost(post.postId)">
+            <i-bs
+              name="trash-fill"
+              class="text-danger"
+              width="1em"
+              height="1rem"
+            >
             </i-bs>
           </a>
         </h5>
-        <p class="blog-post-meta">{{ post.subTitle }}</p>
+        <p class="card-text mb-auto">{{ post.subTitle }}</p>
+        <div class="mt-4 text-muted">
+          Created at: {{ post.createDate | date }}
+        </div>
+        <div class="text-muted">
+          <ng-container *ngIf="post.lastUpdateDate !== null; else elseTemplate">
+            Last updated: {{ post.lastUpdateDate | date }}
+          </ng-container>
+          <ng-template #elseTemplate>
+            Last updated: Not updated yet
+          </ng-template>
+        </div>
       </div>
     </div>
   </ng-container>
