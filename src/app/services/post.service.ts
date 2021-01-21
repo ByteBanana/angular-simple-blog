@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { PostRequest } from '../models/post-request.model';
 import { PostResponse } from '../models/post-response.model';
+import { CommentRequest } from '../models/comment-request.model';
+import { CommentResponse } from '../models/comment-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +18,7 @@ import { PostResponse } from '../models/post-response.model';
 export class PostService {
   onPublishPostEvent = new EventEmitter<boolean>();
   onUpdatePostEvent = new EventEmitter<boolean>();
+  onFetchCommentsEvent = new EventEmitter<void>();
 
   constructor(
     private http: HttpClient,
@@ -33,8 +36,19 @@ export class PostService {
     return this.http.get<PostResponse>(this.POST_URL + '/' + postId);
   }
 
+  fetchCommentsByPostId(postId: number): Observable<CommentResponse[]> {
+    return this.http.get<CommentResponse[]>(
+      `${this.POST_URL}/${postId}/comments`,
+      {}
+    );
+  }
+
   publish(postRequest: PostRequest): Observable<PostResponse> {
     return this.http.post<PostResponse>(this.POST_URL, postRequest);
+  }
+
+  commentPost(postId: number, request: CommentRequest): Observable<any> {
+    return this.http.post(`${this.POST_URL}/${postId}/comments`, request);
   }
 
   checkPermiss(postId: number): Observable<any> {

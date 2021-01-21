@@ -1,4 +1,4 @@
-<div class="card blog-post p-4">
+<div class="card blog-post p-4" style="margin-bottom: 1rem">
   <h2 class="blog-post-title">{{ post.title }}</h2>
   <p class="blog-post-meta">
     {{ (post === undefined ? "" : (post.createDate | date)) + " " }}
@@ -6,3 +6,62 @@
   </p>
   <quill-view-html [content]="post.content" theme="snow"></quill-view-html>
 </div>
+<hr />
+<h2 class="blog-comment-title mb-2">Comment</h2>
+<app-comment-card *ngFor="let comment of comments" [comment]="comment"></app-comment-card>
+
+<form [formGroup]="commentForm">
+  <div class="form-group row">
+    <ng-container *ngIf="previewComment; else editCommentTemplate">
+      <div class="col-sm-12 d-flex" style="min-height: 200px">
+        <quill-view-html
+          class="border w-100"
+          [content]="commentForm.get('comment').value"
+          theme="snow"
+        ></quill-view-html>
+      </div>
+    </ng-container>
+    <ng-template #editCommentTemplate>
+      <div class="col-sm-12 d-flex" style="min-height: 200px">
+        <quill-editor
+          format="html"
+          formControlName="comment"
+          class="d-flex flex-column"
+          style="min-height: 200px"
+          trackChanges="all"
+        ></quill-editor>
+      </div>
+    </ng-template>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-12">
+      <button
+        class="btn btn-primary mr-2"
+        (click)="onCommentPost(post.postId)"
+        [disabled]="commenting"
+        style="width: 98px"
+      >
+        <span
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+          *ngIf="commenting"
+        ></span>
+        Submit
+      </button>
+      <ng-container *ngIf="previewComment; else elseTemplate">
+        <button class="btn btn-secondary" (click)="onSetPreviewMode(false)">
+          Continue editing
+        </button>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <button
+          class="btn btn-outline-secondary"
+          (click)="onSetPreviewMode(true)"
+        >
+          Preview
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</form>

@@ -26,7 +26,6 @@ export class TokenInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log("logout")
     if (this.urlIsLoginOrRefreshToken(request) || request.method === 'GET') {
       return next.handle(request);
     }

@@ -27,6 +27,7 @@ import { MyPublishedPostsComponent } from './pages/my-published-posts/my-publish
 import { EditPostComponent } from './pages/edit-post/edit-post.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
+import { CommentCardComponent } from './components/comment-card/comment-card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +44,7 @@ import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.
     EditPostComponent,
     MyProfileComponent,
     ConfirmModalComponent,
+    CommentCardComponent,
   ],
   imports: [
     BrowserModule,

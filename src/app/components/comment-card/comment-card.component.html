@@ -1,0 +1,90 @@
+<div class="card mb-2">
+  <div class="comment-header">
+    <div class="d-flex justify-content-between">
+      <a>
+        {{ comment.username }}
+        <span class="px-2">•</span>
+        {{ comment.createDate | date }}
+      </a>
+      <div
+        class="icon-group d-flex flex-row"
+        *ngIf="isCurrentUserOwnedComment()"
+      >
+        <a (click)="onEditComment()">
+          <i-bs
+            name="pen-fill"
+            with="2em"
+            height="2em"
+            class="text-primary px-1"
+          ></i-bs>
+        </a>
+        <div class="icon-group">
+          <a (click)="onDeleteComment()">
+            <i-bs
+              name="trash-fill"
+              with="2em"
+              height="2em"
+              class="text-danger px-1"
+            ></i-bs>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="editMode; else elseTemplate">
+    <form [formGroup]="editCommentForm" class="m-4">
+      <div class="form-group-row">
+        <ng-container *ngIf="previewComment; else previewCommentTemplate">
+          <quill-view-html
+            [content]="comment.message"
+            theme="snow"
+            class="card-body´"
+          ></quill-view-html>
+        </ng-container>
+        <ng-template #previewCommentTemplate>
+          <quill-editor
+            formControlName="comment"
+            format="html"
+            trackChanges="all"
+          ></quill-editor>
+        </ng-template>
+      </div>
+      <div class="form-group-row py-1">
+        <button
+          class="btn btn-primary"
+          (click)="onUpdateComment(comment.commentId, comment.postId)"
+        >
+          Update
+        </button>
+        <ng-container *ngIf="previewComment; else previewButtonTemplate">
+          <button
+            class="btn btn-secondary mx-2"
+            (click)="onPreviewComment(false)"
+          >
+            Continue update
+          </button>
+        </ng-container>
+        <ng-template #previewButtonTemplate>
+          <button
+            class="btn btn-outline-secondary mx-2"
+            (click)="onPreviewComment(true)"
+          >
+            Preview
+          </button>
+        </ng-template>
+
+        <button class="btn btn-outline-danger" (click)="onCancelComment()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <quill-view-html
+      [content]="comment.message"
+      theme="snow"
+      class="card-body´"
+    ></quill-view-html>
+  </ng-template>
+</div>

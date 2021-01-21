@@ -22,8 +22,7 @@ export class MyPublishedPostsComponent implements OnInit {
     private meService: MeService,
     private modalService: NgbModal,
     private postService: PostService,
-    private toastr: ToastrService,
-    private router: Router
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -41,17 +40,19 @@ export class MyPublishedPostsComponent implements OnInit {
     modal.componentInstance.title = 'Confirm';
     modal.componentInstance.body = 'Do you really want to delete this post?';
     modal.result.then((result) => {
-      this.deletePostSubscription = this.postService
-        .deletePost(postId)
-        .subscribe(
-          () => {
-            this.toastr.success('Post deleted');
-            this.loadPublishedPosts();
-          },
-          (err) => {
-            this.toastr.error('Something went wrong!');
-          }
-        );
+      if (result) {
+        this.deletePostSubscription = this.postService
+          .deletePost(postId)
+          .subscribe(
+            () => {
+              this.toastr.success('Post deleted');
+              this.loadPublishedPosts();
+            },
+            (err) => {
+              this.toastr.error('Something went wrong!');
+            }
+          );
+      }
     });
   }
 
