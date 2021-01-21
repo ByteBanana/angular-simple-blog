@@ -35,11 +35,16 @@ export class CommentCardComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onEditComment() {
+  onOpenEditForm() {
     this.editMode = !this.editMode;
     this.editCommentForm.patchValue({
       comment: this.comment.message,
     });
+
+    this.editCommentForm.get('comment').markAsUntouched();
+    this.editCommentForm.get('comment').markAsPristine();
+
+    console.log(this.editCommentForm.get('comment'));
   }
 
   onDeleteComment() {
@@ -73,12 +78,23 @@ export class CommentCardComponent implements OnInit {
     this.editMode = false;
   }
 
-  onUpdateComment(commentId: number, postId: number) {
+  onUpdateComment(commentId: number, postId: number): void {
+    const commentCtrl = this.editCommentForm.get('comment');
+    const dirty = commentCtrl.dirty;
+    const touched = commentCtrl.touched;
+    const formTouchedOrDirty = dirty || touched;
+
+    if (commentCtrl.invalid || !formTouchedOrDirty) {
+      return;
+    }
+
     const message = this.editCommentForm.get('comment').value;
+
     const commentRequest: CommentRequest = {
       message,
       postId,
     };
+
     this.commentService.updateComment(commentId, commentRequest).subscribe(
       () => {
         this.toastr.success('Comment updated');
