@@ -9,7 +9,7 @@
 <hr />
 <h2 class="blog-comment-title mb-2">Comment</h2>
 <app-comment-card *ngFor="let comment of comments" [comment]="comment"></app-comment-card>
-
+<hr class="mt-4">
 <form [formGroup]="commentForm">
   <div class="form-group row">
     <ng-container *ngIf="previewComment; else editCommentTemplate">

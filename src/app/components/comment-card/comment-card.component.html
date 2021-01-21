@@ -37,7 +37,7 @@
       <div class="form-group-row">
         <ng-container *ngIf="previewComment; else previewCommentTemplate">
           <quill-view-html
-            [content]="comment.message"
+            [content]="editCommentForm.get('comment').value"
             theme="snow"
             class="card-body´"
           ></quill-view-html>
