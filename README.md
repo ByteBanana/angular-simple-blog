@@ -8,4 +8,4 @@ Simple blog project front-end applcation that allow user write ,read or comment 
 
 ## Running this application locally
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`
