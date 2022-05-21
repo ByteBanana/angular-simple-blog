@@ -5,15 +5,10 @@ import {
   HttpEvent,
   HttpInterceptor,
   HttpErrorResponse,
-  HttpHeaders,
 } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { LocalStorageService } from 'ngx-webstorage';
-import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { catchError, filter, switchMap, take } from 'rxjs/operators';
-import { threadId } from 'worker_threads';
-import { AuthenticationResponse } from '../models/auth-response.model';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -26,7 +21,7 @@ export class TokenInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (this.urlIsLoginOrRefreshToken(request) || request.method === 'GET') {
+    if (this.isLoginOrRefreshTokenUrl(request) || this.isRegisterUrl(request)) {
       return next.handle(request);
     }
     const jwtToken = this.authService.getJwtToken();
@@ -77,10 +72,15 @@ export class TokenInterceptor implements HttpInterceptor {
     }
   }
 
-  private urlIsLoginOrRefreshToken(request: HttpRequest<any>): boolean {
+  private isRegisterUrl(request: HttpRequest<any>): boolean {
+    return request.method === 'POST' && request.url.indexOf('register') !== -1;
+  }
+
+  private isLoginOrRefreshTokenUrl(request: HttpRequest<any>): boolean {
     return (
-      request.url.indexOf('refresh') !== -1 ||
-      request.url.indexOf('login') !== -1
+      (request.url.indexOf('refresh') !== -1 ||
+        request.url.indexOf('login') !== -1) &&
+      request.method === 'POST'
     );
   }
 
