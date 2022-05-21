@@ -65,7 +65,7 @@ export class AuthService {
       .subscribe(
         (response) => {
           if (response.status == 200) {
-            this.toastr.success('Success', 'Registration');
+            this.router.navigate(['/register-complete']);
           }
         },
         (error) => {
