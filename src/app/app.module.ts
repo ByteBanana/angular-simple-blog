@@ -28,6 +28,7 @@ import { EditPostComponent } from './pages/edit-post/edit-post.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { CommentCardComponent } from './components/comment-card/comment-card.component';
+import { RegistrationCompleteComponent } from './pages/registration-complete/registration-complete.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +46,7 @@ import { CommentCardComponent } from './components/comment-card/comment-card.com
     MyProfileComponent,
     ConfirmModalComponent,
     CommentCardComponent,
+    RegistrationCompleteComponent,
   ],
   imports: [
     BrowserModule,

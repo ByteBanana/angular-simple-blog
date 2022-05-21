@@ -12,6 +12,7 @@ import { MyPublishedPostsComponent } from './pages/my-published-posts/my-publish
 import { EditPostComponent } from './pages/edit-post/edit-post.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { PermissionGuard } from './guards/permission.guard';
+import { RegistrationCompleteComponent } from './pages/registration-complete/registration-complete.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
         pathMatch: 'full',
       },
     ],
+  },
+  {
+    path: 'register-complete',
+    component: RegistrationCompleteComponent,
   },
   {
     path: '',
